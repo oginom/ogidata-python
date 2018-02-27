@@ -4,7 +4,7 @@
 import requests
 import json
 
-import config
+from . import config
 
 class OgiDataManager:
 

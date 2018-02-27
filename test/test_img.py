@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #coding:utf-8
 
 from OgiData import OgiDataManager
@@ -8,8 +8,8 @@ import sys
 if __name__ == '__main__':
 
   if len(sys.argv) != 3:
-    print "for example:"
-    print "python test_img.py img0.jpg Coke_Normal"
+    print("for example:")
+    print("python test_img.py img0.jpg Coke_Normal")
     sys.exit()
 
   #m.uploadImage("img1.jpg")

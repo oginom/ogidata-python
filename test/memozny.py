@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #coding:utf-8
 
 from OgiData import OgiDataManager
@@ -8,8 +8,8 @@ import sys
 if __name__ == '__main__':
 
   if len(sys.argv) != 3:
-    print "for example:"
-    print "python memozny.py USAGI 208.49"
+    print("for example:")
+    print("python memozny.py USAGI 208.49")
     sys.exit()
 
   ###### insert data ######

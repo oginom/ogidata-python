@@ -1,7 +1,7 @@
-#!usr/bin/env python
-# coding:utf-8
+#!/usr/bin/env python
+#coding:utf-8
 
-from OgiData.OgiDataManager import OgiDataManager
+from OgiData import OgiDataManager
 import json
 import sys
 

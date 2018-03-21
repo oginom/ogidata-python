@@ -30,8 +30,10 @@ class OgiDataManager:
       'cols': cols
     }
     response = requests.post(url, params)
-    #print(response.json())
-    print(response.text)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
 
   def dropTable(self, title):
     url = self.apiurl + 'droptable.php'
@@ -51,7 +53,10 @@ class OgiDataManager:
       'data' : data
     }
     response = requests.post(url, params)
-    print(response.text)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
 
   def deleteData(self, title, data_id):
     url = self.apiurl + 'deletedata.php'

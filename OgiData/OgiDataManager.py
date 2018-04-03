@@ -13,13 +13,15 @@ class OgiDataManager:
       self.apiurl = config.apiurl
     else:
       self.apiurl = apiurl
+    self.printErrorMessage = True
     return
 
   def __isErrorResponse(self, response_j):
     if type(response_j) != dict:
       return False
     if 'ErrorMessage' in response_j:
-      print(response_j['ErrorMessage'])
+      if self.printErrorMessage:
+        print(response_j['ErrorMessage'])
       return True
     return False
 
@@ -113,11 +115,20 @@ class OgiDataManager:
       return False
     return ret
 
-  def getData(self, title):
+  def getData(self, title, start_index=None, limit=None, asc=None):
     url = self.apiurl + 'getdata.php'
     params = {
       'title' : title
     }
+    if start_index != None:
+      params['start_index'] = start_index
+    if limit != None:
+      params['limit'] = limit
+    if asc != None:
+      if asc:
+        params['asc'] = "YES"
+      else:
+        params['asc'] = "NO"
     response = requests.get(url, params=params)
     ret = response.json()
     if self.__isErrorResponse(ret):

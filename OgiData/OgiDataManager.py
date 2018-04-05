@@ -135,4 +135,19 @@ class OgiDataManager:
       return False
     return ret
 
+  def getChoice(self, title, columns=None, limit=None):
+    url = self.apiurl + 'getchoice.php'
+    params = {
+      'title' : title
+    }
+    if columns != None:
+      params['columns'] = json.dumps(columns)
+    if limit != None:
+      params['limit'] = limit
+    response = requests.get(url, params=params)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
+
 

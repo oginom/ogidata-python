@@ -96,6 +96,17 @@ class OgiDataManager:
       return False
     return ret
 
+  def getImageInfo(self, img_id):
+    url = self.apiurl + 'getimageinfo.php'
+    params = {
+      'img_id' : img_id
+    }
+    response = requests.get(url, params)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
+
   def getTables(self):
     url = self.apiurl + 'gettables.php'
     response = requests.get(url)

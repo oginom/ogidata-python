@@ -60,6 +60,19 @@ class OgiDataManager:
       return False
     return ret
 
+  def updateData(self, title, data_id, data):
+    url = self.apiurl + 'updatedata.php'
+    params = {
+      'title' : title,
+      'data_id' : data_id,
+      'data' : data
+    }
+    response = requests.post(url, params)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
+
   def deleteData(self, title, data_id):
     url = self.apiurl + 'deletedata.php'
     params = {

@@ -26,7 +26,7 @@ class OgiDataManager:
     return False
 
   def createTable(self, title, cols):
-    url = self.apiurl + 'createtable.php'
+    url = self.apiurl + 'createtable'
     params = {
       'title': title,
       'cols': cols
@@ -38,7 +38,7 @@ class OgiDataManager:
     return ret
 
   def dropTable(self, title):
-    url = self.apiurl + 'droptable.php'
+    url = self.apiurl + 'droptable'
     params = {
       'title': title,
     }
@@ -49,7 +49,7 @@ class OgiDataManager:
     return ret
 
   def insertData(self, title, data):
-    url = self.apiurl + 'insertdata.php'
+    url = self.apiurl + 'insertdata'
     params = {
       'title' : title,
       'data' : data
@@ -61,11 +61,11 @@ class OgiDataManager:
     return ret
 
   def updateData(self, title, data_id, data):
-    url = self.apiurl + 'updatedata.php'
+    url = self.apiurl + 'updatedata'
     params = {
       'title' : title,
       'data_id' : data_id,
-      'data' : data
+      'data' : json.dumps(data)
     }
     response = requests.post(url, params)
     ret = response.json()
@@ -74,7 +74,7 @@ class OgiDataManager:
     return ret
 
   def deleteData(self, title, data_id):
-    url = self.apiurl + 'deletedata.php'
+    url = self.apiurl + 'deletedata'
     params = {
       'title' : title,
       'data_id' : data_id
@@ -86,7 +86,7 @@ class OgiDataManager:
     return ret
 
   def uploadImage(self, filename):
-    url = self.apiurl + 'uploadimage.php'
+    url = self.apiurl + 'uploadimage'
     params = {
     }
     files = {
@@ -99,7 +99,7 @@ class OgiDataManager:
     return ret['img_id']
 
   def removeImage(self, img_id):
-    url = self.apiurl + 'removeimage.php'
+    url = self.apiurl + 'removeimage'
     params = {
       'img_id' : img_id
     }
@@ -110,7 +110,7 @@ class OgiDataManager:
     return ret
 
   def getImageInfo(self, img_id):
-    url = self.apiurl + 'getimageinfo.php'
+    url = self.apiurl + 'getimageinfo'
     params = {
       'img_id' : img_id
     }
@@ -121,15 +121,26 @@ class OgiDataManager:
     return ret
 
   def getTables(self):
-    url = self.apiurl + 'gettables.php'
+    url = self.apiurl + 'gettables'
     response = requests.get(url)
     ret = response.json()
     if self.__isErrorResponse(ret):
       return False
     return ret
 
+  def getTableID(self, title):
+    url = self.apiurl + 'gettableid'
+    params = {
+      'title' : title
+    }
+    response = requests.get(url, params=params)
+    ret = response.json()
+    if self.__isErrorResponse(ret):
+      return False
+    return ret
+
   def getTableInfo(self, title):
-    url = self.apiurl + 'gettableinfo.php'
+    url = self.apiurl + 'gettableinfo'
     params = {
       'title' : title
     }
@@ -140,7 +151,7 @@ class OgiDataManager:
     return ret
 
   def getData(self, title, start_index=None, limit=None, asc=None):
-    url = self.apiurl + 'getdata.php'
+    url = self.apiurl + 'getdata'
     params = {
       'title' : title
     }

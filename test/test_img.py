@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 #coding:utf-8
 
-from OgiData import OgiDataManager
 import json
 import sys
+sys.path.append('..')
+from OgiData import OgiDataManager
 
 if __name__ == '__main__':
 
-  if len(sys.argv) != 3:
+  if len(sys.argv) != 4:
     print("for example:")
-    print("python test_img.py img0.jpg Coke_Normal")
+    print(sys.argv[0] + " img0.jpg cider,coke,CocaCola Coke_Normal")
     sys.exit()
 
   #m.uploadImage("img1.jpg")
@@ -23,6 +24,14 @@ if __name__ == '__main__':
   #  {
   #    'name':'Image',
   #    'type':'IMG',
+  #    'type_detail':{
+  #      'img_width':512,
+  #      'img_height':512
+  #    }
+  #  },
+  #  {
+  #    'name':'Tags',
+  #    'type':'TAGS',
   #  },
   #  {
   #    'name':'Description',
@@ -32,8 +41,13 @@ if __name__ == '__main__':
   #m.createTable(title, cols)
 
   ###### insert data ######
+  imgID = m.uploadImage(sys.argv[1])
   data = json.dumps({
-    'Image' : m.uploadImage(sys.argv[1]),
-    'Description' : sys.argv[2]
+    'Image' : imgID,
+    'Tags' : sys.argv[2],
+    'Description' : sys.argv[3]
   })
-  m.insertData(title, data)
+  print(data)
+  if not m.insertData(title, data):
+    m.removeImage(imgID)
+

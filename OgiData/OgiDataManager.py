@@ -171,7 +171,7 @@ class OgiDataManager:
     return ret
 
   def getChoice(self, title, columns=None, limit=None):
-    url = self.apiurl + 'getchoice.php'
+    url = self.apiurl + 'getchoice'
     params = {
       'title' : title
     }
